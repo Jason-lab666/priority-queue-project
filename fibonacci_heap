@@ -1,0 +1,55 @@
+#include <cmath>
+#include <vector>
+using namespace std;
+
+struct FibNode {
+    int key, degree;
+    FibNode *parent, *child, *left, *right;
+    bool mark;
+
+    FibNode(int k) {
+        key = k;
+        degree = 0;
+        parent = child = nullptr;
+        left = right = this;
+        mark = false;
+    }
+};
+
+class FibonacciHeap {
+private:
+    FibNode* minNode;
+    int n;
+
+    void addToRootList(FibNode* node) {
+        if (!minNode) {
+            minNode = node;
+        } else {
+            node->left = minNode;
+            node->right = minNode->right;
+            minNode->right->left = node;
+            minNode->right = node;
+
+            if (node->key < minNode->key)
+                minNode = node;
+        }
+    }
+
+public:
+    FibonacciHeap() {
+        minNode = nullptr;
+        n = 0;
+    }
+
+    void insert(int key) {
+        FibNode* node = new FibNode(key);
+        addToRootList(node);
+        if (!minNode || node->key < minNode->key)
+            minNode = node;
+        n++;
+    }
+
+    int getMin() {
+        return minNode->key;
+    }
+};
