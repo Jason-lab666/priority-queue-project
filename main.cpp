@@ -1,10 +1,10 @@
 #include <iostream>
 #include <vector>
 #include <chrono>
+#include <cstdlib>
 using namespace std;
 using namespace chrono;
 
-// ===== Binary Heap =====
 class BinaryHeap {
 private:
     vector<int> heap;
@@ -25,7 +25,6 @@ public:
     }
 };
 
-// ===== Test =====
 vector<int> generateData(int n) {
     vector<int> data;
     for (int i = 0; i < n; i++) {
@@ -34,7 +33,7 @@ vector<int> generateData(int n) {
     return data;
 }
 
-void test(int n) {
+long long test(int n) {
     BinaryHeap h;
     auto data = generateData(n);
 
@@ -42,16 +41,17 @@ void test(int n) {
     for (int x : data) h.insert(x);
     auto end = high_resolution_clock::now();
 
-    cout << "Binary Heap Insert " << n << ": "
-         << duration_cast<milliseconds>(end - start).count()
-         << " ms\n";
+    return duration_cast<milliseconds>(end - start).count();
 }
 
 int main() {
     vector<int> sizes = {1000, 10000, 50000};
 
+    cout << "Size,Time(ms)\n";   // CSV格式
+
     for (int n : sizes) {
-        test(n);
+        long long t = test(n);
+        cout << n << "," << t << "\n";
     }
 
     return 0;
