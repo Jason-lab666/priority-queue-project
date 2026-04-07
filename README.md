@@ -37,5 +37,3 @@ We tested performance using randomly generated data with sizes:
 - 50,000
 
 Results show that binary heaps perform better in practice despite higher theoretical complexity.
-
-Compile using:
