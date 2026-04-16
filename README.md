@@ -33,7 +33,9 @@ This project focuses on understanding the trade-offs between different implement
 
 We tested performance using randomly generated data with sizes:
 - 1,000
+- 5,000
 - 10,000
+- 20,000
 - 50,000
 
 Results show that binary heaps perform better in practice despite higher theoretical complexity.
